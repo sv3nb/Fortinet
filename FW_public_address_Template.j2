@@ -1,0 +1,8 @@
+
+config firewall address
+{% for address in address_list -%}
+  edit {{ address["FQDN"] }}
+  set type ipmask
+  set subnet {{ address["ip"] }}/32
+  set color 15
+{% endfor -%}

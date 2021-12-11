@@ -1,0 +1,9 @@
+IP range;CIDR;default gateway;Comment
+10.10.98.0;/24;10.10.98.254;this is my first network
+10.10.99.0;/24;10.10.99.254;this is the second network
+10.10.100.0;/24;10.10.100.254;this is the third network
+10.10.101.0;/24;10.10.101.254;this is the fourth network
+10.10.121.0;/24;10.10.121.254;this is the fifth network
+10.10.122.0;/24;10.10.112.254;this is the sixth network
+10.10.123.0;/24;10.10.123.254;this is the seventh network
+10.10.124.0;/24;10.10.124.254;this is the eight network

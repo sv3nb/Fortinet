@@ -1,0 +1,21 @@
+
+config firewall address
+{% for subnet in subnets -%}
+  {% if not subnet['CIDR'] -%}
+  edit n-{{ subnet['IP range'] }}/24
+  set type ipmask
+  set subnet {{ subnet['IP range'] }}/24
+  {% else -%}
+  edit n-{{ subnet['IP range'] }}{{ subnet['CIDR'] }}
+  set type ipmask
+  set subnet {{ subnet['IP range'] }}{{ subnet['CIDR'] }}
+  {% endif -%}
+  {% if subnet['Comment'] -%}
+  set comment {{  '\"' + subnet['Comment'] +  '\"' |replace(" ","_") }}
+  {% endif -%}
+  {% if '10.8' in subnet['IP range'] -%}
+  set color 10
+  {% else -%}
+  set color 20
+  {% endif %}
+{% endfor -%}

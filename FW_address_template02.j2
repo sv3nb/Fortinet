@@ -1,0 +1,18 @@
+
+config firewall address
+  {% for address in list -%}
+  edit {{ address }}
+    set type fqdn
+    set fqdn {{ address }}
+    set color 19
+    {% if "doco" in address -%}
+    set comment "domain controller"
+    {% elif "sap" in address -%}
+    set comment "sap server"
+    {% elif "dfs" in address -%}
+    set comment "distributed file server"
+    {% else -%}
+    set comment  {{ '\"Server ' + address.split('.')[0] + '\"' }}
+    {% endif -%}
+  next
+  {% endfor -%}
