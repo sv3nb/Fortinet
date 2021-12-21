@@ -10,7 +10,7 @@ reader = csv.DictReader(f, delimiter=';')
 headers = reader.fieldnames
 subnets = []
 for row in reader:
-	vlans.append(row)
+	subnets.append(row)
 
 print(template.render(subnets=subnets))
 
