@@ -1,3 +1,4 @@
+
 # Fortinet
 Netsec automation for Fortinet
 
@@ -6,3 +7,4 @@ I used a similar script for a customer' firewall migration to generate about 440
 Combine this for example with the HTTP requests library in python to make API calls to the fortigate using JSON/RPC.
 
 More scripts will be added in the future.
+This is a test
