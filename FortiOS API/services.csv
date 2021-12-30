@@ -1,0 +1,24 @@
+name;protocol;tcp-portrange;udp-portrange;sctp-portrange;comment;color
+UDP_highports;UDP;;49152 -65535;;Used by Windows RPC;10
+TCP_highports;TCP;49152 -65535;;;Used by Windows RPC;11
+svc-gc;TCP;3268;;;Global catalog port;10
+svc-sapdp;TCP;3200-3299;;;Used by SAP GUI for Windows and Java.;12
+svc_sapgw;TCP;3300-3399;;;Used for CPIC and RFC communication.;12
+svc-sapgw_secure;TCP;4800-4899;;;;12
+svc-sapctrl;TCP;50013-59913;;;SAP Central Services;12
+svc-sapmsSID;TCP;3600-3699;;;;12
+svc-message_server;TCP;8100-8199;;;Message server HTTP SAP;12
+svc_proxy;TCP;8080;;;Proxy service;10
+svc-lpr;TCP/UDP;515;515;;Print service;10
+TCP_5001;TCP;5001;;;custom service;10
+TCP_5002;TCP;5002;;;custom service;10
+TCP_5003;TCP;5003;;;custom service;10
+TCP_5004;TCP;5004;;;custom service;10
+TCP_5005;TCP;5005;;;custom service;10
+TCP_5006;TCP;5006;;;custom service;10
+TCP_5009;TCP;5009;;;custom service;10
+TCP_5007;TCP;5007;;;custom service;10
+TCP_5008;TCP;5008;;;custom service;10
+TCP_50011;TCP;50011;;;custom service;10
+TCP_50021;TCP;50021;;;custom service;10
+TCP_50041;TCP;50041;;;custom service;10
