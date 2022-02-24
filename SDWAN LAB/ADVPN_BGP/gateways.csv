@@ -1,0 +1,5 @@
+ID;hostname;role;mgmt IP;tunnel IP;WAN interface;remote gateway;protected subnets;ADVPN;ASN;summarize;loopback IP
+1;BEDCC-SDWFW;Hub;192.168.108.20;172.31.100.1;wan1;dynamic;10.100.0.0/23;yes;65100;yes;
+2;BEANT-SDWFW;Spoke;192.168.108.10;172.31.100.2;wan1;100.64.100.10;10.16.10.0/24,10.16.20.0/24,10.16.30.0/24;yes;65100;yes;
+3;BEGEN-SDWFW;Spoke;192.168.108.30;172.31.100.3;wan1;100.64.100.10;10.18.10.0/24,10.18.30.0/24;yes;65100;yes;
+4;BEBRU-SDFW;Spoke;192.168.108.40;172.31.100.4;wan1;100.64.100.10;10.25.10.0/24,10.25.20.0/24,10.25.30.0/24;yes;65100;yes;

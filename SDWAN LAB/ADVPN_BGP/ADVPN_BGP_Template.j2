@@ -1,0 +1,96 @@
+
+----BEGIN CONFIG FOR {{ hostname }} FortiOS version 6.4.8----
+
+config vpn ipsec phase1-interface
+    edit VPN_PRI
+        set interface {{ WAN_interface }}
+        set ike-version 2
+        set peertype any
+        set proposal aes256-sha256
+        {% if role == 'spoke' -%}
+        set net-device enable
+        set add-route disable
+        {% if ADVPN == 'yes' -%}
+        set auto-discovery-receiver enable
+        {% endif -%}
+        set remote-gw 185.160.112.11
+        {% else -%}
+        set net-device disable
+        set type dynamic
+        {% if ADVPN == 'yes' -%}
+        set auto-discovery-sender enable
+        set add-route disable
+        set tunnel-search nexthop
+        {% endif -%}
+        {% endif -%}
+        set localid {{ hostname.split('-')[0] }}
+        set dpd on-idle
+        set dhgrp 21
+        set nattraversal disable
+        set psksecret {{ psk }}
+    next
+end
+config vpn ipsec phase2-interface
+    edit VPN_PRI
+        set phase1name VPN_PRI
+        set proposal aes256-sha256
+        set dhgrp 21
+        set keepalive enable
+    next
+end
+config system interface
+    edit VPN_PRI
+        set vdom root
+        set ip {{ tunnel_IP }}/32
+        set allowaccess ping
+        set type tunnel
+        {% if role == 'spoke' -%}
+        set remote-ip 172.31.100.1/24
+        {% else -%}
+        set remote-ip 172.31.100.254/24
+        {% endif -%}
+        set snmp-index 48
+        set interface {{ WAN_interface }}
+    next
+end
+config router bgp
+    set as {{ ASN }}
+    set router-id {{ tunnel_IP }}
+    set keepalive-timer 10
+    set holdtime-timer 30
+    set ibgp-multipath enable
+    set additional-path enable
+    set graceful-restart enable
+    {% if role == 'hub' -%}
+    config neighbor-group
+        edit "ADVPNGROUP"
+            set soft-reconfiguration enable
+            set remote-as {{ ASN }}
+            set additional-path both
+            set route-reflector-client enable
+    end
+    config neighbor-range
+        edit 1
+            set prefix {{ overlay_subnet }}
+            set neighbor-group "ADVPNGROUP"
+        next
+    end
+    {% else -%}
+    config neighbor
+        edit 172.31.100.1
+            set soft-reconfiguration enable
+            set remote-as {{ ASN }}
+            set additional-path both
+        next
+    end
+    {% endif -%}
+    config network
+        {% for subnet in subnets -%}
+        edit {{ loop.index }}
+            set prefix {{ subnet }}
+        next
+        {% endfor -%}
+    end
+end
+
+----END CONFIG FOR {{ hostname }}----
